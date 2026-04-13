@@ -5,7 +5,7 @@ class Cidade(models.Model):
     uf = models.CharField(max_length=2, verbose_name="UF")
 
     def __str__(self):
-        return f'{self.nome}, {self.uf}'
+        return f'{self.nome}'
 
     class Meta:
         verbose_name = "Cidade"
@@ -13,7 +13,7 @@ class Cidade(models.Model):
 
 
 class Ocupacao(models.Model):
-    nome = models.CharField(max_length=100, verbose_name="Ocupação da pessoa")
+    nome = models.CharField(max_length=100, verbose_name="Ocupação")
 
     def __str__(self):
         return f'{self.nome}'
@@ -24,18 +24,18 @@ class Ocupacao(models.Model):
 
 
 class Pessoa(models.Model):
-    nome = models.CharField(max_length=100, verbose_name="Nome da pessoa")
+    nome = models.CharField(max_length=100, verbose_name="Nome")
     pai = models.CharField(max_length=100, verbose_name="Nome do pai")
     mae = models.CharField(max_length=100, verbose_name="Nome da mãe")
     cpf = models.CharField(max_length=14, unique=True, verbose_name="CPF")
     data_nasc = models.DateField(verbose_name="Data de nascimento")
-    email = models.CharField(max_length=100, verbose_name="Email")
+    email = models.CharField(max_length=100, verbose_name="E-mail")
 
     cidade = models.ForeignKey(Cidade, on_delete=models.CASCADE, verbose_name="Cidade")
     ocupacao = models.ForeignKey(Ocupacao, on_delete=models.CASCADE, verbose_name="Ocupação")
 
     def __str__(self):
-        return f'{self.nome}, {self.email}'
+        return f'{self.nome}'
 
     class Meta:
         verbose_name = "Pessoa"
@@ -43,7 +43,7 @@ class Pessoa(models.Model):
 
 
 class InstituicaoEnsino(models.Model):
-    nome = models.CharField(max_length=100, verbose_name="Nome da instituição")
+    nome = models.CharField(max_length=100, verbose_name="Instituição")
     site = models.CharField(max_length=100, verbose_name="Site")
     telefone = models.CharField(max_length=19, verbose_name="Telefone")
 
@@ -116,7 +116,7 @@ class Matricula(models.Model):
     data_previsao_termino = models.DateField(verbose_name="Previsão de término")
 
     def __str__(self):
-        return f'{self.pessoa} - {self.curso}'
+        return f'{self.pessoa}, {self.curso}'
 
     class Meta:
         verbose_name = "Matrícula"
@@ -141,7 +141,7 @@ class Avaliacao(models.Model):
     avaliacao_tipo = models.ForeignKey(AvaliacaoTipo, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f'{self.descricao}'
+        return f'{self.avaliacao_tipo}'
 
     class Meta:
         verbose_name = "Avaliação"
@@ -156,7 +156,7 @@ class Frequencia(models.Model):
     numero_faltas = models.IntegerField(verbose_name="Faltas")
 
     def __str__(self):
-        return f'{self.numero_faltas}'
+        return f'{self.pessoa}, {self.numero_faltas}'
 
     class Meta:
         verbose_name = "Frequência"
@@ -182,7 +182,7 @@ class Ocorrencia(models.Model):
     pessoa = models.ForeignKey(Pessoa, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f'{self.pessoa} - {self.curso}'
+        return f'{self.pessoa}, {self.curso}'
 
     class Meta:
         verbose_name = "Ocorrência"
@@ -194,10 +194,10 @@ class CursoDisciplina(models.Model):
     disciplina = models.ForeignKey(Disciplina, on_delete=models.CASCADE)
 
     carga_horaria = models.IntegerField()
-    periodo = models.CharField(max_length=2, verbose_name="Período")
+    periodo = models.CharField(max_length=20, verbose_name="Período")
 
     def __str__(self):
-        return f'{self.curso} - {self.disciplina}'
+        return f'{self.curso}, {self.disciplina}'
 
     class Meta:
         verbose_name = "Curso Disciplina"

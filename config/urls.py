@@ -20,4 +20,21 @@ from app.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', IndexView.as_view(), name='home'),
+    
+    path('cidade/', CidadeView.as_view()),
+    path('ocupacao/', OcupacaoView.as_view()),
+    path('pessoa/', PessoaView.as_view()),
+    path('instituicao/', InstituicaoView.as_view()),
+    path('curso/', CursoView.as_view()),
+    path('disciplina/', DisciplinaView.as_view()),
+    path('matricula/', MatriculaView.as_view()),
+    path('avaliacao/', AvaliacaoView.as_view()),
+    path('frequencia/', FrequenciaView.as_view()),
+    path('ocorrencia/', OcorrenciaView.as_view()),
+    path('area-saber/', AreaSaberView.as_view()),
+    path('avaliacao-tipo/', AvaliacaoTipoView.as_view()),
+    path('curso-disciplina/', CursoDisciplinaView.as_view()),
+    path('turma/', TurmaView.as_view()),
+    path('turnos/', TurnosView.as_view()),
 ]
